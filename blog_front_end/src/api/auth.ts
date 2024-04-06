@@ -1,5 +1,5 @@
 import {http} from "~/api/http";
-import type {RegisterUser} from "~/types/register";
+import type {LoginUser, RegisterUser, userInfoDto} from "~/types/register";
 export  interface captchaData {
     data:string
     code:number
@@ -12,4 +12,9 @@ export async function  getCaptcha(email:string){
 //注册接口
 export async function register(registerUser: RegisterUser) {
     return await http.post("/user/register", registerUser);
+}
+
+//登陆接口
+export async function login(loginUser:LoginUser){
+    return await http.post<userInfoDto>('/user/login',loginUser)
 }

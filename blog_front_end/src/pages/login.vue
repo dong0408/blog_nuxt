@@ -8,11 +8,11 @@
       <!-- 姓名-->
       <el-form :model="form" label-width="auto" style="max-width: 600px">
         <el-form-item label="Name">
-          <el-input v-model="form.name" />
+          <el-input v-model="form.username" />
         </el-form-item>
         <!--    邮箱-->
-        <el-form-item label="Email">
-          <el-input v-model="form.name" />
+        <el-form-item label="password">
+          <el-input v-model="form.password" />
         </el-form-item>
         <div class="tip">没有账号，前去注册</div>
         <el-form-item >
@@ -27,15 +27,27 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
+import {Buffer} from "unenv/runtime/node/buffer/_buffer";
+import  {login} from "~/api/auth";
+import from = Buffer.from;
+import type {LoginUser} from "~/types/register";
 
 // do not use same name with ref
-const form = reactive({
-  name: '',
-  Email: '',
+const form = reactive<LoginUser>({
+  username: '',
+  password: '',
 })
 
-const onSubmit = () => {
-  console.log('submit!')
+const onSubmit = async() => {
+const res=  await login(form)
+  console.log(res)
+
+  localStorage.setItem("access_token", res.data.accessToken);
+  localStorage.setItem("refresh_token", res.data.refreshToken);
+  localStorage.setItem("user_info", JSON.stringify(res.data.userInfo));
+
+
+  return navigateTo('list')
 }
 </script>
 

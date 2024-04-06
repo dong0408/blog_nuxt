@@ -3,7 +3,15 @@
 </script>
 
 <template>
-  <h1>这是默认模版，头部</h1>
+ <div class="flex justify-between">
+   <div>123</div>
+   <div class="flex">
+     <div>
+       <el-button @click="ElMessage('hello')">添加文章</el-button>
+     </div>
+     <div>789</div>
+   </div>
+ </div>
 
 </template>
 
