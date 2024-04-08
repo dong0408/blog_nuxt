@@ -8,6 +8,7 @@ export default defineNuxtConfig({
       '@vueuse/nuxt',
       '@element-plus/nuxt',
       '@unocss/nuxt',
+      'nuxt-monaco-editor'
       // ['@nuxtjs/axios',
       // {proxyHeaders:false},]
   ],
@@ -35,5 +36,6 @@ export default defineNuxtConfig({
         "@pinia/nuxt",
         "@vueuse/nuxt",
         "@nuxtjs/axios",
+
     ]
 })

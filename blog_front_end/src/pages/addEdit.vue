@@ -18,66 +18,11 @@
         <el-option label="Zone two" value="beijing" />
       </el-select>
     </el-form-item>
-    <el-form-item label="Activity count" prop="count">
-      <el-select-v2
-          v-model="ruleForm.count"
-          placeholder="Activity count"
-          :options="options"
-      />
-    </el-form-item>
-    <el-form-item label="Activity time" required>
-      <el-col :span="11">
-        <el-form-item prop="date1">
-          <el-date-picker
-              v-model="ruleForm.date1"
-              type="date"
-              label="Pick a date"
-              placeholder="Pick a date"
-              style="width: 100%"
-          />
-        </el-form-item>
-      </el-col>
-      <el-col class="text-center" :span="2">
-        <span class="text-gray-500">-</span>
-      </el-col>
-      <el-col :span="11">
-        <el-form-item prop="date2">
-          <el-time-picker
-              v-model="ruleForm.date2"
-              label="Pick a time"
-              placeholder="Pick a time"
-              style="width: 100%"
-          />
-        </el-form-item>
-      </el-col>
-    </el-form-item>
-    <el-form-item label="Instant delivery" prop="delivery">
-      <el-switch v-model="ruleForm.delivery" />
-    </el-form-item>
-    <el-form-item label="Activity type" prop="type">
-      <el-checkbox-group v-model="ruleForm.type">
-        <el-checkbox value="Online activities" name="type">
-          Online activities
-        </el-checkbox>
-        <el-checkbox value="Promotion activities" name="type">
-          Promotion activities
-        </el-checkbox>
-        <el-checkbox value="Offline activities" name="type">
-          Offline activities
-        </el-checkbox>
-        <el-checkbox value="Simple brand exposure" name="type">
-          Simple brand exposure
-        </el-checkbox>
-      </el-checkbox-group>
-    </el-form-item>
-    <el-form-item label="Resources" prop="resource">
-      <el-radio-group v-model="ruleForm.resource">
-        <el-radio value="Sponsorship">Sponsorship</el-radio>
-        <el-radio value="Venue">Venue</el-radio>
-      </el-radio-group>
-    </el-form-item>
     <el-form-item label="Activity form" prop="desc">
       <el-input v-model="ruleForm.desc" type="textarea" />
+    </el-form-item>
+    <el-form-item label="内容">
+      <funny-editor></funny-editor>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm(ruleFormRef)">
@@ -85,7 +30,12 @@
       </el-button>
       <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
     </el-form-item>
+
   </el-form>
+<div>
+  <funny-editor></funny-editor>
+
+</div>
 </template>
 
 <script lang="ts" setup>
@@ -95,10 +45,6 @@ import type { FormInstance, FormRules } from 'element-plus'
 interface RuleForm {
   name: string
   region: string
-  count: string
-  date1: string
-  date2: string
-  delivery: boolean
   type: string[]
   resource: string
   desc: string
@@ -109,10 +55,6 @@ const ruleFormRef = ref<FormInstance>()
 const ruleForm = reactive<RuleForm>({
   name: 'Hello',
   region: '',
-  count: '',
-  date1: '',
-  date2: '',
-  delivery: false,
   type: [],
   resource: '',
   desc: '',
@@ -130,29 +72,9 @@ const rules = reactive<FormRules<RuleForm>>({
       trigger: 'change',
     },
   ],
-  count: [
-    {
-      required: true,
-      message: 'Please select Activity count',
-      trigger: 'change',
-    },
-  ],
-  date1: [
-    {
-      type: 'date',
-      required: true,
-      message: 'Please pick a date',
-      trigger: 'change',
-    },
-  ],
-  date2: [
-    {
-      type: 'date',
-      required: true,
-      message: 'Please pick a time',
-      trigger: 'change',
-    },
-  ],
+
+
+
   type: [
     {
       type: 'array',
